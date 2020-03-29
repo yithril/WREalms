@@ -1,0 +1,105 @@
+﻿@model WanderlustRealms.Models.Items.Weapon
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Weapon</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DamageType" class="control-label"></label>
+                <select asp-for="DamageType" class="form-control" asp-items="Html.GetEnumSelectList<WanderlustRealms.Models.Enum.DamageType>()"></select>
+                <span asp-validation-for="DamageType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Coefficient" class="control-label"></label>
+                <input asp-for="Coefficient" class="form-control" />
+                <span asp-validation-for="Coefficient" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DamageDice" class="control-label"></label>
+                <input asp-for="DamageDice" class="form-control" />
+                <span asp-validation-for="DamageDice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DamageConstant" class="control-label"></label>
+                <input asp-for="DamageConstant" class="form-control" />
+                <span asp-validation-for="DamageConstant" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsOneHanded" /> @Html.DisplayNameFor(model => model.IsOneHanded)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsArtifact" /> @Html.DisplayNameFor(model => model.IsArtifact)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsPrimal" /> @Html.DisplayNameFor(model => model.IsPrimal)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShortDesc" class="control-label"></label>
+                <input asp-for="ShortDesc" class="form-control" />
+                <span asp-validation-for="ShortDesc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LongDesc" class="control-label"></label>
+                <textarea asp-for="LongDesc" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="LongDesc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Keywords" class="control-label"></label>
+                <input asp-for="Keywords" class="form-control" />
+                <span asp-validation-for="Keywords" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HowItWorksDesc" class="control-label"></label>
+                <input asp-for="HowItWorksDesc" class="form-control" />
+                <span asp-validation-for="HowItWorksDesc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Size" class="control-label"></label>
+                <select asp-for="Size" class="form-control" asp-items="Html.GetEnumSelectList<WanderlustRealms.Models.Enum.ItemSize>()"></select>
+                <span asp-validation-for="Size" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cost" class="control-label"></label>
+                <input asp-for="Cost" class="form-control" />
+                <span asp-validation-for="Cost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Weight" class="control-label"></label>
+                <input asp-for="Weight" class="form-control" />
+                <span asp-validation-for="Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaterialType" class="control-label"></label>
+                <select asp-for="MaterialType" class="form-control" asp-items="Html.GetEnumSelectList<WanderlustRealms.Models.Enum.MaterialTypes>()"></select>
+                <span asp-validation-for="MaterialType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

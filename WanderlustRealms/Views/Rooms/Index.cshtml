@@ -1,0 +1,68 @@
+﻿@model IEnumerable<WanderlustRealms.Models.Rooms.Room>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<h2>@ViewBag.RoomAreaName</h2>
+<p>
+    <a asp-action="Create" asp-route-RoomAreaID="@ViewBag.RoomAreaID">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsRessurectionPoint)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TerrainType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LightLevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsRessurectionPoint)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TerrainType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LightLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomArea.RoomAreaID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.RoomID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.RoomID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.RoomID">Delete</a> |
+                <a asp-action="Index" asp-route-RoomID="@item.RoomID" asp-controller="RoomExits">Exits</a> |
+                <a asp-action="AddNPC" asp-route-RoomID="@item.RoomID" asp-controller="Rooms">Add NPC</a> |
+                <a asp-action="AddItem" asp-route-RoomID="@item.RoomID" asp-controller="Rooms">Add Item</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

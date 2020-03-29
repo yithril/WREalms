@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WanderlustRealms.Models.Living.PlayerCharacter>
+
+@{
+    ViewData["Title"] = "Default";
+    Layout = "_Layout";
+}
+
+<div class="card">
+    <div class="card-header"><h4>Your Characters</h4></div>
+    <div class="card-body">
+        @if (ViewBag.CanCreate)
+        {
+            <div class="row">
+                <div class="col-12">
+                    <div class="float-right">
+                        <a class="btn btn-primary" asp-controller="PlayerCharacters" asp-action="NewCharacter" >New Character</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="row mt-2">
+            <div class="col-12">
+                <table class="table">
+                    <tr>
+                        <th>Name</th>
+                        <th>Race</th>
+                        <th>Kingdom</th>
+                        <th></th>
+                    </tr>
+                    @foreach(var c in Model.OrderBy(x => x.Name))
+                    {
+                        <tr>
+                            <td>@c.Name</td>
+                            <td>@c.Race.Name</td>
+                            <td>@c.RoomKingdom.Name</td>
+                            <td>
+                                <div class="float-right">
+                                    <a class="btn btn-info" type="button" asp-action="CharacterDetails" asp-controller="PlayerCharacters" asp-route-id="@c.LivingID">Details</a>
+                                    <a class="btn btn-danger" type="button">Delete</a>
+                                    <a class="btn btn-success" type="button" asp-action="GameStart" asp-controller="Home" asp-route-LivingID="@c.LivingID">Enter Game</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+

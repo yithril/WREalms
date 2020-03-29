@@ -1,0 +1,131 @@
+﻿@model WanderlustRealms.Models.Items.Armor
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Armor</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ArmorPoints" class="control-label"></label>
+                <input asp-for="ArmorPoints" class="form-control" />
+                <span asp-validation-for="ArmorPoints" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsPrimal" /> @Html.DisplayNameFor(model => model.IsPrimal)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemType" class="control-label"></label>
+                <select asp-for="ItemType" class="form-control" asp-items="Html.GetEnumSelectList<WanderlustRealms.Models.Enum.ItemTypes>()"></select>
+                <span asp-validation-for="ItemType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LimbIDList" class="control-label"></label>
+                <input asp-for="LimbIDList" class="form-control" />
+                <span asp-validation-for="LimbIDList" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SkillBoost" class="control-label"></label>
+                <input asp-for="SkillBoost" class="form-control" />
+                <span asp-validation-for="SkillBoost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StatBoost" class="control-label"></label>
+                <input asp-for="StatBoost" class="form-control" />
+                <span asp-validation-for="StatBoost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StatToBoost" class="control-label"></label>
+                <select asp-for="StatToBoost" class="form-control" asp-items="Html.GetEnumSelectList<WanderlustRealms.Models.Enum.Stats>()"></select>
+                <span asp-validation-for="StatToBoost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SkillID" class="control-label"></label>
+                <select asp-for="SkillID" class="form-control" asp-items="ViewBag.SkillID"></select>
+                <span asp-validation-for="SkillID" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsAccessory" /> @Html.DisplayNameFor(model => model.IsAccessory)
+                </label>
+            </div>
+            <input type="hidden" asp-for="ItemID" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShortDesc" class="control-label"></label>
+                <input asp-for="ShortDesc" class="form-control" />
+                <span asp-validation-for="ShortDesc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LongDesc" class="control-label"></label>
+                <input asp-for="LongDesc" class="form-control" />
+                <span asp-validation-for="LongDesc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HowItWorksDesc" class="control-label"></label>
+                <input asp-for="HowItWorksDesc" class="form-control" />
+                <span asp-validation-for="HowItWorksDesc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Size" class="control-label"></label>
+                <select asp-for="Size" class="form-control" asp-items="Html.GetEnumSelectList<WanderlustRealms.Models.Enum.ItemSize>()"></select>
+                <span asp-validation-for="Size" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cost" class="control-label"></label>
+                <input asp-for="Cost" class="form-control" />
+                <span asp-validation-for="Cost" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CanTake" /> @Html.DisplayNameFor(model => model.CanTake)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Weight" class="control-label"></label>
+                <input asp-for="Weight" class="form-control" />
+                <span asp-validation-for="Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaterialType" class="control-label"></label>
+                <select asp-for="MaterialType" class="form-control" asp-items="Html.GetEnumSelectList<WanderlustRealms.Models.Enum.MaterialTypes>()"></select>
+                <span asp-validation-for="MaterialType" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsMagical" /> @Html.DisplayNameFor(model => model.IsMagical)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsCursed" /> @Html.DisplayNameFor(model => model.IsCursed)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

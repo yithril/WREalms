@@ -1,0 +1,126 @@
+﻿@model WanderlustRealms.Models.Living.PlayerCharacter
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>PlayerCharacter</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserID" class="control-label"></label>
+                <select asp-for="UserID" class="form-control" asp-items="ViewBag.UserID"></select>
+                <span asp-validation-for="UserID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlayerBackgroundID" class="control-label"></label>
+                <select asp-for="PlayerBackgroundID" class="form-control" asp-items="ViewBag.PlayerBackgroundID"></select>
+                <span asp-validation-for="PlayerBackgroundID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="XP" class="control-label"></label>
+                <input asp-for="XP" class="form-control" />
+                <span asp-validation-for="XP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Level" class="control-label"></label>
+                <input asp-for="Level" class="form-control" />
+                <span asp-validation-for="Level" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomKingdomID" class="control-label"></label>
+                <select asp-for="RoomKingdomID" class="form-control" asp-items="ViewBag.RoomKingdomID"></select>
+                <span asp-validation-for="RoomKingdomID" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="LivingID" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShortDesc" class="control-label"></label>
+                <input asp-for="ShortDesc" class="form-control" />
+                <span asp-validation-for="ShortDesc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RaceID" class="control-label"></label>
+                <select asp-for="RaceID" class="form-control" asp-items="ViewBag.RaceID"></select>
+                <span asp-validation-for="RaceID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GoodAlignment" class="control-label"></label>
+                <input asp-for="GoodAlignment" class="form-control" />
+                <span asp-validation-for="GoodAlignment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderAlignment" class="control-label"></label>
+                <input asp-for="OrderAlignment" class="form-control" />
+                <span asp-validation-for="OrderAlignment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxHP" class="control-label"></label>
+                <input asp-for="MaxHP" class="form-control" />
+                <span asp-validation-for="MaxHP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxMP" class="control-label"></label>
+                <input asp-for="MaxMP" class="form-control" />
+                <span asp-validation-for="MaxMP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CurrentHP" class="control-label"></label>
+                <input asp-for="CurrentHP" class="form-control" />
+                <span asp-validation-for="CurrentHP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CurrentMP" class="control-label"></label>
+                <input asp-for="CurrentMP" class="form-control" />
+                <span asp-validation-for="CurrentMP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedBy" class="control-label"></label>
+                <input asp-for="CreatedBy" class="form-control" />
+                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModifiedBy" class="control-label"></label>
+                <input asp-for="ModifiedBy" class="form-control" />
+                <span asp-validation-for="ModifiedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedDate" class="control-label"></label>
+                <input asp-for="CreatedDate" class="form-control" />
+                <span asp-validation-for="CreatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModifiedDate" class="control-label"></label>
+                <input asp-for="ModifiedDate" class="form-control" />
+                <span asp-validation-for="ModifiedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

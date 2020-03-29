@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WanderlustRealms.Models.Shop.Shop>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ShopName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LivingID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HaggleModifier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlayerBackground)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Race)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomKingdom)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShopName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LivingID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HaggleModifier)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlayerBackground.PlayerBackgroundID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Race.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomKingdom.Description)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ShopID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ShopID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ShopID">Delete</a> |
+                <a asp-action="Index" asp-controller="ShopItems" asp-route-ShopID="@item.ShopID">Shop Items</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

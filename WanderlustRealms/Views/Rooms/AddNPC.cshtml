@@ -1,0 +1,29 @@
+﻿@model WanderlustRealms.Models.ViewModel.RoomNPCViewModel
+
+@{
+    ViewData["Title"] = "AddNPC";
+}
+
+<div class="card">
+    <div class="card-header">Add NPC to Room</div>
+    <div class="card-body">
+        <form asp-action="AddNPC">
+            <div class="row">
+                <div class="col-12">
+                    <p>@ViewBag.RoomName</p>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-12">
+                    <input type="hidden" asp-for="RoomID" value="@ViewBag.RoomID" />
+                    <select asp-for="LivingID" asp-items="@ViewBag.NPCList" class="form-control"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+
+    </div>
+</div>
+

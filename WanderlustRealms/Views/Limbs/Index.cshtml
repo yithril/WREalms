@@ -1,0 +1,92 @@
+﻿@model IEnumerable<WanderlustRealms.Models.Races.Limb>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <h4 class="card-header">Limb Index</h4>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="float-right">
+                        <p>
+                            <a asp-action="Create">Create New</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IsVital)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Description)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IsWieldable)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.CanFly)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IsEnhancedUnarmed)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.SortOrder)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IsVital)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IsWieldable)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CanFly)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IsEnhancedUnarmed)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SortOrder)
+                                    </td>
+                                    <td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.LimbID">Edit</a> |
+                                        <a asp-action="Details" asp-route-id="@item.LimbID">Details</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.LimbID">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

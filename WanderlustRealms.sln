@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WanderlustRealms", "WanderlustRealms\WanderlustRealms.csproj", "{23EAEA9C-84BC-4FD6-B941-B02538120456}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestProject1", "XUnitTestProject1\XUnitTestProject1.csproj", "{4BA842DC-A099-4CFF-B66D-5B70872E2C94}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{23EAEA9C-84BC-4FD6-B941-B02538120456}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23EAEA9C-84BC-4FD6-B941-B02538120456}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23EAEA9C-84BC-4FD6-B941-B02538120456}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23EAEA9C-84BC-4FD6-B941-B02538120456}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BA842DC-A099-4CFF-B66D-5B70872E2C94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BA842DC-A099-4CFF-B66D-5B70872E2C94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BA842DC-A099-4CFF-B66D-5B70872E2C94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BA842DC-A099-4CFF-B66D-5B70872E2C94}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8310146D-0FCA-4084-9C69-A823EA3760A8}
+	EndGlobalSection
+EndGlobal

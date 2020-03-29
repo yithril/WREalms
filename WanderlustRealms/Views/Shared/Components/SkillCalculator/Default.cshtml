@@ -1,0 +1,256 @@
+﻿@model IEnumerable<WanderlustRealms.Models.ViewModel.SkillPointViewModel>
+
+@{
+    ViewData["Title"] = "SkillCalculator";
+    Layout = null;
+}
+
+    <div class="container-fluid" id="ctSkills">
+        <div class="card">
+            <div class="card-header">Assign Skill Points</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div classs="col-4">
+                        <div class="text-center">
+                            <button class="btn btn-success btn-lg" type="button" style="display: none;" id="btnSubmit">Create Character!</button>
+                        </div>
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <label class="control-label">Choose a background:</label>
+                            <div class="input-group">
+                                <select asp-items="ViewBag.PlayerBackgroundList" id="PlayerBackgroundDropDown" class="form-control"> </select>
+                                <div class="input-group-append">
+                                    <div class="btn btn-secondary btnHelpBackground" type="button"><i class="fas fa-question"></i></div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="BackgroundName" value="@ViewBag.BackgroundName"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        You have
+                    </div>
+                    <div class="col-3">
+                        <input class="form-control" id="currentSkillPoints" readonly value="@ViewBag.StartingSkillPoints" />
+                    </div>
+                    <div class="col-3">
+                        point(s) remaining.
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-12">
+                        <table class="table">
+                            <tr>
+                                <th>Skill Name</th>
+                                <th></th>
+                                <th>Racial Bonus</th>
+                                <th>Background Bonus</th>
+                                <th></th>
+                                <th>Total</th>
+                            </tr>
+                            @foreach (var s in Model)
+                            {
+                                <tr>
+                                    <td>@s.Name</td>
+                                    <td>
+                                        <button type="button" class="btn btn-secondary btn-circle btnHelp" data-id="@s.Name"><i class="fas fa-question"></i></button>
+                                    </td>
+                                    <td>
+                                        @if (s.RaceBonus > 0)
+                                        {
+                                            <input class="form-control" readonly value="@s.RaceBonus" style="background-color: lightgreen" />
+                                        }
+                                        else
+                                        {
+                                            <input class="form-control" readonly value="@s.RaceBonus" />
+                                        }
+
+                                    </td>
+                                    <td>
+                                        @if (s.BackgroundBonus > 0)
+                                        {
+                                            <input class="form-control" readonly value="@s.BackgroundBonus" style="background-color: lightgreen" />
+                                        }
+                                        else
+                                        {
+                                            <input class="form-control" readonly value="@s.BackgroundBonus" />
+                                        }
+
+                                    </td>
+                                    <td>
+                                        <div class="input-group">
+                                            <input class="form-control border border-secondary" id="skill_@s.Name.Replace(" ", "")" readonly value="0" />
+                                            <div class="input-group-append">
+                                                <button type="button" data-id="@s.Name.Replace(" ", "")" class="skill_arrowup"><i class="fas fa-arrow-circle-up fa-2x"></i></button>
+                                                <button type="button" data-id="@s.Name.Replace(" ", "")" class="skill_arrowdown"><i class="fas fa-arrow-circle-down fa-2x"></i></button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input class="form-control skillBlock" id="skilltotal_@s.Name.Replace(" ", "")" data-id="@s.SkillID" value="@s.TotalBonus" readonly />
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+<script>
+
+    $(document).ready(function () {
+        var total = @ViewBag.StartingSkillPoints;
+        var maxTotal = total;
+
+        $("#btnSubmit").click(function () {
+            var name = $("#Name").val();
+            var gender = $("#Gender").val();
+            var kingdom = $("#RoomKingdom").val();
+            var race = $("#RaceID").val();
+            var background = $("#PlayerBackgroundDropDown").val();
+            var durability = $("#stat_durability").val();
+            var willpower = $("#stat_willpower").val();
+            var intellect = $("#stat_intellect").val();
+            var charisma = $("#stat_charisma").val();
+            var intuition = $("#stat_intuition").val();
+            var dexterity = $("#stat_dexterity").val();
+            var goodAlign = $("#GoodAlignChoice").val();
+            var orderAlign = $("#OrderAlignChoice").val();
+
+            var dataObj = {
+                Name: name,
+                Gender: gender,
+                RoomKingdomID: kingdom,
+                RaceID: race,
+                PlayerBackgroundID: background,
+                SetDur: durability,
+                SetWill: willpower,
+                SetInt: intellect,
+                SetCha: charisma,
+                SetIntuit: intuition,
+                SetDex: dexterity,
+                GoodAlignChoice: goodAlign,
+                OrderAlignChoice: orderAlign,
+                Skills: []
+            };
+
+            $(".skillBlock").each(function(i, obj) {
+                var skillID = obj.getAttribute('data-id');
+                var value = obj.value;
+
+                if (Number(value) > 0) {
+                     var subObj = { SkillID: skillID, Total: value };
+                     dataObj.Skills.push(subObj);
+                }
+            });
+
+            console.log(dataObj);
+            
+            var url = '@Url.Action("CreateNewCharacter", "PlayerCharacters")';
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: dataObj,
+                success: function () {
+                    var nextURL = '@Url.Action("CharacterManager", "PlayerCharacters")';
+                    window.location = nextURL;
+                }
+            });
+        });
+
+         $(".btnHelp").click(function () {
+            var id = $(this).attr('data-id');
+            var url = '@Url.Action("HelpComponent", "HelpItems")?HelpTerm=' + id;
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (data) {
+                     $("#site_modal_container").html(data);
+                    $("#site_modal").modal('show');
+                }
+            });
+            
+         });
+
+        
+        $(".btnHelpBackground").click(function () {
+            var id = $("#BackgroundName").val();
+
+            var url = '@Url.Action("HelpComponent", "HelpItems")?HelpTerm=' + id;
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (data) {
+                     $("#site_modal_container").html(data);
+                    $("#site_modal").modal('show');
+                }
+            });
+        });
+
+        $("#PlayerBackgroundDropDown").change(function () {
+            var id = $("#PlayerBackgroundDropDown").val();
+            var name = $("#PlayerBackgroundDropDown option:selected").text();
+            var raceid = $("#RaceID").val();
+            var url = '@Url.Action("SkillCalculator", "PlayerCharacters")?RaceID=' + raceid + '&PlayerBackgroundID=' + id;
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (data) {
+                    $("#ctSkills").html(data);
+                    $("#BackgroundName").val(name);
+                }
+            });
+
+        });
+
+        $('.skill_arrowup').click(function () {
+            var skill = $(this).attr('data-id');
+            var currentVal = $('#skill_' + skill).val();
+            var totalVal = $("#skilltotal_" + skill).val();
+
+            if (Number(total) > 0) {
+                var currentValue = $("#skill_" + skill).val();
+                $("#skill_" + skill).val(Number(currentValue) + 1);
+                total = total - 1;
+                $("#currentSkillPoints").val(Number(total));
+                $("#skilltotal_" + skill).val(Number(totalVal) + 1);
+            }
+
+            if (total == 0) {
+                $("#btnSubmit").show();
+            }
+        });
+
+        $('.skill_arrowdown').click(function () {
+            var skill = $(this).attr('data-id');
+            var currentVal = $('#skill_' + skill).val();
+            var totalVal = $("#skilltotal_" + skill).val();
+
+            if (Number(currentVal) > 0) {
+                $("#skill_" + skill).val(Number(currentVal) - 1);
+                total += 1;
+                $("#currentSkillPoints").val(Number(total));
+                $("#skilltotal_" + skill).val(Number(totalVal) - 1);
+            }
+        });
+    });
+
+        
+</script>
+

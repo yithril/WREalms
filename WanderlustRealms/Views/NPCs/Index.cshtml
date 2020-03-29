@@ -1,0 +1,105 @@
+﻿@model IEnumerable<WanderlustRealms.Models.Living.NPC>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShortDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Race)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GoodAlignment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderAlignment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Durability)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dexterity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Charisma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Intellect)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Willpower)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Intuition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShortDesc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Race.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GoodAlignment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderAlignment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Durability)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dexterity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Charisma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Intellect)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Willpower)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Intuition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.LivingID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.LivingID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.LivingID">Delete</a> |
+                @if(item.IsTrainer)
+                {
+                    <a asp-action="Index" asp-controller="TrainerSkills" asp-route-LivingID="@item.LivingID">Trainer Skills</a>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-WanderlustRealms-C987E05D-2BEC-42C0-8B24-00EEB33993B3</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20200301134745_doIneedone.cs" />
+    <Compile Remove="Data\Migrations\20200301134745_doIneedone.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200327222023_trainingUpdate.cs" />
+    <Compile Remove="Data\Migrations\20200327222023_trainingUpdate.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200327222237_updateLanguage.cs" />
+    <Compile Remove="Data\Migrations\20200327222237_updateLanguage.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200327222439_LanguageUpgrade.cs" />
+    <Compile Remove="Data\Migrations\20200327222439_LanguageUpgrade.Designer.cs" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Models\Actions\" />
+    <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
+</Project>

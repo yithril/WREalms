@@ -1,0 +1,48 @@
+﻿@model WanderlustRealms.Models.GamePlay.GameAction
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>GameAction</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Verb)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Verb)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CommandLength)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CommandLength)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IsStandard)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IsStandard)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AlternateKeywords)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AlternateKeywords)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Function)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Function)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.GameActionID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,145 @@
+﻿@model WanderlustRealms.Models.Races.Race
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Race</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="RaceID" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinLightLevel" class="control-label"></label>
+                <input asp-for="MinLightLevel" class="form-control" />
+                <span asp-validation-for="MinLightLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Size" class="control-label"></label>
+                <input asp-for="Size" class="form-control" />
+                <span asp-validation-for="Size" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsPremium" /> @Html.DisplayNameFor(model => model.IsPremium)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsPlayable" /> @Html.DisplayNameFor(model => model.IsPlayable)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="StatPoints" class="control-label"></label>
+                <input asp-for="StatPoints" class="form-control" />
+                <span asp-validation-for="StatPoints" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SkillPoints" class="control-label"></label>
+                <input asp-for="SkillPoints" class="form-control" />
+                <span asp-validation-for="SkillPoints" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PicURL" class="control-label"></label>
+                <input asp-for="PicURL" class="form-control" />
+                <span asp-validation-for="PicURL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BodyID" class="control-label"></label>
+                <select asp-for="BodyID" class="form-control" asp-items="ViewBag.BodyID"></select>
+                <span asp-validation-for="BodyID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinInt" class="control-label"></label>
+                <input asp-for="MinInt" class="form-control" />
+                <span asp-validation-for="MinInt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxInt" class="control-label"></label>
+                <input asp-for="MaxInt" class="form-control" />
+                <span asp-validation-for="MaxInt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinDur" class="control-label"></label>
+                <input asp-for="MinDur" class="form-control" />
+                <span asp-validation-for="MinDur" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxDur" class="control-label"></label>
+                <input asp-for="MaxDur" class="form-control" />
+                <span asp-validation-for="MaxDur" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MinIntuit" class="control-label"></label>
+                <input asp-for="MinIntuit" class="form-control" />
+                <span asp-validation-for="MinIntuit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxIntuit" class="control-label"></label>
+                <input asp-for="MaxIntuit" class="form-control" />
+                <span asp-validation-for="MaxIntuit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinDex" class="control-label"></label>
+                <input asp-for="MinDex" class="form-control" />
+                <span asp-validation-for="MinDex" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxDex" class="control-label"></label>
+                <input asp-for="MaxDex" class="form-control" />
+                <span asp-validation-for="MaxDex" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinWill" class="control-label"></label>
+                <input asp-for="MinWill" class="form-control" />
+                <span asp-validation-for="MinWill" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxWill" class="control-label"></label>
+                <input asp-for="MaxWill" class="form-control" />
+                <span asp-validation-for="MaxWill" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinCha" class="control-label"></label>
+                <input asp-for="MinCha" class="form-control" />
+                <span asp-validation-for="MinCha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxCha" class="control-label"></label>
+                <input asp-for="MaxCha" class="form-control" />
+                <span asp-validation-for="MaxCha" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

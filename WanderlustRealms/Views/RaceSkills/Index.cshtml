@@ -1,0 +1,53 @@
+﻿@model IEnumerable<WanderlustRealms.Models.Skills.RaceSkill>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Race)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Skill)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartingBonus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RateModifier)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Race.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Skill.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartingBonus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RateModifier)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.RaceSkillID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.RaceSkillID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.RaceSkillID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

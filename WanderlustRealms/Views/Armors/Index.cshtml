@@ -1,0 +1,132 @@
+﻿@model IEnumerable<WanderlustRealms.Models.Items.Armor>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ArmorPoints)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsPrimal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LimbIDList)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SkillBoost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatBoost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatToBoost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Skill)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAccessory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CanTake)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaterialType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsMagical)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsCursed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArmorPoints)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPrimal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LimbIDList)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SkillBoost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatBoost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatToBoost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Skill.SkillID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAccessory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Size)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CanTake)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaterialType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsMagical)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsCursed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ItemID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ItemID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ItemID">Delete</a> |
+                <a asp-action="ArmorLimbs" asp-route-ItemID="@item.ItemID">Limbs</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,59 @@
+﻿@model WanderlustRealms.Models.Shop.Shop
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Shop</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ShopID" />
+            <div class="form-group">
+                <label asp-for="ShopName" class="control-label"></label>
+                <input asp-for="ShopName" class="form-control" />
+                <span asp-validation-for="ShopName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LivingID" class="control-label"></label>
+                <select asp-for="LivingID" class="form-control" asp-items="@ViewBag.LivingID"></select>
+                <span asp-validation-for="LivingID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HaggleModifier" class="control-label"></label>
+                <input asp-for="HaggleModifier" class="form-control" />
+                <span asp-validation-for="HaggleModifier" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlayerBackgroundID" class="control-label"></label>
+                <select asp-for="PlayerBackgroundID" class="form-control" asp-items="ViewBag.PlayerBackgroundID">
+                    <option disabled selected>None</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="RaceID" class="control-label"></label>
+                <select asp-for="RaceID" class="form-control" asp-items="ViewBag.RaceID">
+                    <option disabled selected>None</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomKingdomID" class="control-label"></label>
+                <select asp-for="RoomKingdomID" class="form-control" asp-items="ViewBag.RoomKingdomID">
+                    <option disabled selected>None</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

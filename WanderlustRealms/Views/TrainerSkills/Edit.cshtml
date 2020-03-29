@@ -1,0 +1,46 @@
+﻿@model WanderlustRealms.Models.Training.TrainerSkill
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>TrainerSkill</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TrainerSkillID" />
+            <div class="form-group">
+                <label asp-for="LivingID" class="control-label"></label>
+                <input asp-for="LivingID" class="form-control" />
+                <span asp-validation-for="LivingID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SkillID" class="control-label"></label>
+                <select asp-for="SkillID" class="form-control" asp-items="ViewBag.SkillID"></select>
+                <span asp-validation-for="SkillID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinLevel" class="control-label"></label>
+                <input asp-for="MinLevel" class="form-control" />
+                <span asp-validation-for="MinLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxLevel" class="control-label"></label>
+                <input asp-for="MaxLevel" class="form-control" />
+                <span asp-validation-for="MaxLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

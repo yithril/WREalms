@@ -1,0 +1,82 @@
+﻿@model WanderlustRealms.Models.Skills.Skill
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Skill</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="SkillID" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PicURL" class="control-label"></label>
+                <input asp-for="PicURL" class="form-control" />
+                <span asp-validation-for="PicURL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RelatedStat" class="control-label"></label>
+                <select asp-for="RelatedStat" class="form-control" asp-items="Html.GetEnumSelectList<WanderlustRealms.Models.Enum.Stats>()"></select>
+                <span asp-validation-for="RelatedStat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BaseLearnRate" class="control-label"></label>
+                <input asp-for="BaseLearnRate" class="form-control" />
+                <span asp-validation-for="BaseLearnRate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinGoodAlignment" class="control-label"></label>
+                <input asp-for="MinGoodAlignment" class="form-control" />
+                <span asp-validation-for="MinGoodAlignment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxGoodAlignment" class="control-label"></label>
+                <input asp-for="MaxGoodAlignment" class="form-control" />
+                <span asp-validation-for="MaxGoodAlignment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinOrderAlignment" class="control-label"></label>
+                <input asp-for="MinOrderAlignment" class="form-control" />
+                <span asp-validation-for="MinOrderAlignment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxOrderAlignment" class="control-label"></label>
+                <input asp-for="MaxOrderAlignment" class="form-control" />
+                <span asp-validation-for="MaxOrderAlignment" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsBackgroundSpecific" /> @Html.DisplayNameFor(model => model.IsBackgroundSpecific)
+                </label>
+            </div>
+
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

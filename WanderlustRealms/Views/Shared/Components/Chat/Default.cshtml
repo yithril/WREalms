@@ -1,0 +1,363 @@
+﻿
+@{
+    ViewData["Title"] = "Default";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid">
+    <input type="hidden" value="@ViewBag.Name" id="userName" />
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header"><h4>Wanderlust Realms || Logged in as @ViewBag.Name</h4></div>
+                <div class="card-body" style="width: 100%;">
+                    <div class="row mr-1">
+                        <div class="col-12">
+                            <div class="chatContainer" style="height: 600px;">
+                                <ul id="gameRoll" style="overflow:hidden; overflow-y:scroll; list-style-type:none; max-height: 600px;"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <div class="input-group">
+                        <input type="text" id="userInput" class="form-control" />
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" id="btnSend">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header"><h4>Users</h4></div>
+                <div class="card-body" style="max-height: 500px; height:400px;">
+                    <div class="row">
+                        <div class="col-12">
+                            <ul id="user-list"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-2">
+                <div class="card-header"><h4>Common Commands</h4></div>
+                <div class="card-body" style="max-height: 200px; overflow:hidden; overflow-y:scroll;">
+                    <div class="row">
+                        <div class="col-12">
+                            <table class="table">
+                                <tr>
+                                    <td>n, s, e, w, nw, ne, sw, se</td>
+                                    <td>Basic directions</td>
+                                </tr>
+                                <tr>
+                                    <td>take (object)</td>
+                                    <td>Take an object in the room</td>
+                                </tr>
+                                <tr>
+                                    <td>drop (object)</td>
+                                    <td>Drop an item from your inventory to the floor.</td>
+                                </tr>
+                                <tr>
+                                    <td>inv</td>
+                                    <td>Check your inventory and encumbrance.</td>
+                                </tr>
+                                <tr>
+                                    <td>limbs</td>
+                                    <td>Check what you're wearing</td>
+                                </tr>
+                                <tr>
+                                    <td>skills</td>
+                                    <td>Check your skills and their level</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <ul id="messagesList"></ul>
+    </div>
+</div>
+
+
+<script src="~/lib/aspnet/signalr/dist/browser/signalr.js"></script>
+
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+    .withUrl("/gameHub?LivingID=@ViewBag.LivingID&PlayerName=@ViewBag.Name")
+    .configureLogging(signalR.LogLevel.Information)
+        .build();
+
+    function ScrollDown() {
+        $('#gameRoll').animate({scrollTop: $('#gameRoll').prop("scrollHeight")}, 500);
+    }
+
+    connection.on("ReceiveShopList", function (items, name) {
+        var li = document.createElement("li");
+        li.textContent = "Welcome to " + name + "!";
+
+        var shopTable = document.createElement("table");
+        shopTable.className = "table";
+
+        var th1 = document.createElement('th');
+        var th2 = document.createElement('th');
+        var htxt1 = document.createTextNode("Item Name");
+        var htxt2 = document.createTextNode("Cost");
+        var trH = document.createElement('tr');
+        th1.appendChild(htxt1);
+        th2.appendChild(htxt2);
+
+        trH.appendChild(th1);
+        trH.appendChild(th2);
+        shopTable.appendChild(trH);
+
+        items.forEach(function (item) {
+            var tr = document.createElement('tr');
+            var td1 = document.createElement('td')
+            var td2 = document.createElement('td')
+            var floatDiv = document.createElement('div');
+
+            var text1 = document.createTextNode(item.name);
+
+            if (item.salesCost != 0) {
+                var text2 = document.createTextNode(item.salesCost + " gold");
+            } else {
+                var text2 = document.createTextNode(item.cost + " gold");
+            }
+            
+            td1.appendChild(text1);
+            floatDiv.appendChild(text2);
+            td2.appendChild(floatDiv);
+
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+
+            shopTable.appendChild(tr);
+              
+        });
+
+        var li2 = document.createElement('li');
+        li2.appendChild(shopTable);
+
+        document.getElementById("gameRoll").appendChild(li);
+        document.getElementById("gameRoll").appendChild(li2);
+        ScrollDown();
+    });
+
+    connection.on("ReceiveMessage", function (message) {
+    var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    var li = document.createElement("li");
+    li.textContent = msg;
+        document.getElementById("gameRoll").appendChild(li);
+        ScrollDown();
+    });
+
+    connection.on("ReceiveErrorMessage", function (message) {
+        var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        var li = document.createElement("li");
+        li.textContent = message;
+        document.getElementById("gameRoll").appendChild(li);
+        ScrollDown();
+    });
+
+    connection.on("ReceiveSkillsMessage", function (skills) {
+
+        var li2 = document.createElement("li");
+        li2.textContent = "[ Skill List ]";
+        li2.style.color = "#00008B";
+        li2.style.fontWeight = "bold";
+        document.getElementById("gameRoll").appendChild(li2);
+
+        skills.forEach(function (item) {
+            var li = document.createElement("li");
+            li.textContent = "[" + item.skill.name + "]: " + item.level;
+            document.getElementById("gameRoll").appendChild(li);
+            ScrollDown();
+        });
+
+    });
+
+    connection.on("ReceiveInventoryMessage", function (itemString, equipedList, current, max) {
+        var li = document.createElement("li");
+        var li2 = document.createElement("li");
+
+        if (current === 0) {
+            li.textContent = "You are not carrying anything. " + "(" + current + " dimins/" + max + " dimins)"
+        } else {
+                    li.textContent = itemString + " (" + current + " dimins/" + max + " dimins)";
+        }
+
+        document.getElementById("gameRoll").appendChild(li);
+
+        if (equipedList != '') {
+            li2.textContent = "[Weapons and Armor]: " + equipedList;
+            document.getElementById("gameRoll").appendChild(li2);
+        }
+
+        ScrollDown();
+    });
+
+    connection.on("ReceiveGoldMessage", function (gold) {
+        var li = document.createElement("li");
+        li.textContent = "You have " + gold + " pieces.";
+        document.getElementById("gameRoll").appendChild(li);
+        ScrollDown();
+    });
+
+    connection.on("ReceiveVitals", function (maxHp, Hp, maxMP, Mp) {
+        var li = document.createElement("li");
+        li.textContent = "Vitals - [   " + Hp + "/" + maxHp + " HP  " + Mp + "/" + maxMP + " MP   ]";
+        li.style.color = "#228B22";
+        document.getElementById("gameRoll").appendChild(li);
+        ScrollDown();
+    });
+
+    connection.on("ReceiveLookMessage", function (shortDesc, longDesc) {
+        var li = document.createElement("li");
+        li.textContent = shortDesc;
+        li.style.fontWeight = "bold";
+        document.getElementById("gameRoll").appendChild(li);
+
+        var li2 = document.createElement("li");
+        li2.textContent = longDesc;
+        document.getElementById("gameRoll").appendChild(li2);
+
+        ScrollDown();
+    });
+
+    connection.on("ReceiveRoomMessage", function (roomTitle, roomDescription, roomExits, desc, npcs, players) {
+        console.log('Loading Room...')
+
+        var li = document.createElement("li");
+        li.textContent = roomTitle;
+        li.style.fontWeight = "bold";
+
+        var li2 = document.createElement("li");
+        li2.textContent = roomDescription;
+
+        var li3 = document.createElement("li");
+        li3.textContent = "Exits: " + GetExitDescription(roomExits);
+        li3.style.color = "#00008b";
+        li3.style.fontWeight = "bold";
+
+        document.getElementById("gameRoll").appendChild(li);
+        document.getElementById("gameRoll").appendChild(li2);
+
+        if (npcs != '') {
+            var li5 = document.createElement("li");
+            li5.textContent = "You see " + npcs;
+            document.getElementById("gameRoll").appendChild(li5);
+        }
+
+        if (players != '') {
+        var li4 = document.createElement("li");
+        li4.textContent = "[Players:] " + players;
+        li4.style.fontWeight = "bold";
+        document.getElementById("gameRoll").appendChild(li4);
+        }
+
+        if (desc != '') {
+        var li5 = document.createElement("li");
+        li5.textContent = "You see " + desc + " on the floor.";
+        document.getElementById("gameRoll").appendChild(li5);
+        }
+
+        document.getElementById("gameRoll").appendChild(li3);
+
+        $('#gameRoll').animate({scrollTop: $('#gameRoll').prop("scrollHeight")}, 500);
+    });
+
+    connection.on("ReceiveActionMessage", function (subject, verb, obj) {
+        var li = document.createElement("li");
+        li.textContent = subject + " " + verb + " " + obj + ".";
+        document.getElementById("gameRoll").appendChild(li);
+        ScrollDown();
+    });
+
+    connection.on("ReceiveLimbsMessage", function (limbs) {
+
+        var li2 = document.createElement("li");
+        li2.textContent = "[ Limbs ]";
+        li2.style.color = "#00008B";
+        li2.style.fontWeight = "bold";
+        document.getElementById("gameRoll").appendChild(li2);
+
+        limbs.forEach(function (arrayItem) {
+            var display = "[" + arrayItem.name + "]: ";
+
+            if (arrayItem.equippedItem != null) {
+                display += arrayItem.equippedItem.name;
+            } else {
+                display += "Nothing";
+            }
+
+            var li = document.createElement("li");
+            li.textContent = display;
+            li.style.color = "#4f3f8c";
+            document.getElementById("gameRoll").appendChild(li);
+            ScrollDown();
+        });
+
+    });
+
+    connection.start().then(function () {
+        console.log("connected");
+        connection.invoke("GetAllConnectedUsers").then((result) => SetUsers(result)).catch(err => console.error(err.toString()));
+    });
+
+    document.getElementById("btnSend").addEventListener("click", function (event) {
+        var user = document.getElementById("userName").value;
+        var message = document.getElementById("userInput").value;
+        connection.invoke("ParseInput", user, message).catch(function (err) {
+            return console.error(err.toString());
+        });
+        $("#userInput").val('');
+        $("#userInput").focus();
+        event.preventDefault();
+    });
+
+    $(document).on('keypress',function(e) {
+    if(e.which == 13) {
+        $("#btnSend").click();
+    }
+});
+
+    function SetUsers(userList) {
+        userList.forEach(function (item, index) {
+            var li = document.createElement("li");
+            li.textContent = item;
+            document.getElementById("user-list").appendChild(li);
+        });
+    }
+
+    function GetListDescription(input) {
+
+        var list = input.filter(function (x) {
+            if (x.Name == "@ViewBag.Name") {
+                return false;
+            }
+            return true;
+        });
+
+        return list.map(function (elem) { return elem.name }).join(', ').replace(/, ([^,]*)$/, ' and $1');
+    }
+
+    function GetExitDescription(list) {
+        return list.map(function (elem) { return elem.exitDesc }).join(', ').replace(/, ([^,]*)$/, ' and $1');
+    }
+
+</script>
+

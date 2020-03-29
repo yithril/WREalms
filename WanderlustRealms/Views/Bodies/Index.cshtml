@@ -1,0 +1,86 @@
+﻿@model IEnumerable<WanderlustRealms.Models.Races.Body>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+    <div class="container-fluid">
+        <div class="card">
+            <h4 class="card-header">Body Index</h4>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="float-right">
+                            <p>
+                                <a asp-action="Create">Create New</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.BodyName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.CreatedBy)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ModifiedBy)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.CreatedDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ModifiedDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.IsActive)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.BodyName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CreatedBy)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ModifiedBy)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CreatedDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ModifiedDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.IsActive)
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.BodyID">Edit</a> |
+                                            <a asp-action="Details" asp-route-id="@item.BodyID">Details</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.BodyID">Delete</a>
+                                            <a asp-action="">Add Limb</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+

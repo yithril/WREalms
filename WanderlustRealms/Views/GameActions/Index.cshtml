@@ -1,0 +1,59 @@
+﻿@model IEnumerable<WanderlustRealms.Models.GamePlay.GameAction>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Verb)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CommandLength)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsStandard)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlternateKeywords)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Function)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.OrderBy(x => x.Verb).ToList()) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Verb)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CommandLength)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsStandard)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlternateKeywords)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Function)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.GameActionID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.GameActionID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.GameActionID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

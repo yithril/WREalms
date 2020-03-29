@@ -1,0 +1,22 @@
+﻿@model IEnumerable<WanderlustRealms.Models.ViewModel.ArmorLimb>
+
+
+<h4>Armor Limbs</h4>
+
+<h4>@ViewBag.ArmorName</h4>
+
+<a asp-action="AddArmorLimbs" asp-controller="Armors" asp-route-ItemID="@ViewBag.ItemID">Add New Limb</a>
+
+<table class="table">
+    <tr>
+        <th>
+            Limbs
+        </th>
+    </tr>
+    @foreach(var a in Model)
+    {
+        <tr>
+            <td>@a.Limb.Name</td>
+        </tr>
+    }
+</table>

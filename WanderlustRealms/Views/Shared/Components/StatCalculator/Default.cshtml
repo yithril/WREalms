@@ -1,0 +1,345 @@
+﻿@model WanderlustRealms.Models.Races.Race
+
+
+@{
+    ViewData["Title"] = "_StatCalculator";
+    Layout = null;
+}
+
+<style>
+    .btn-circle {
+        width: 25px;
+        height: 25px;
+        padding: 6px 0px;
+        border-radius: 15px;
+        text-align: center;
+        font-size: 12px;
+        line-height: 1.42857;
+    }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"></script>
+
+<div class="container-fluid" id="dvSetStatPoints">
+    <div class="card border border-secondary">
+        <div class="card-header">Assign Stat Points</div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="float-right">
+                        <button class="btn btn-primary" type="button" id="btnStatDone" style="display: none;">Next</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-5">
+                    <div class="form-group">
+                        <label class="control-label">Select Race</label>
+                        <div class="input-group">
+                            <select asp-for="RaceID" class="form-control" asp-items="ViewBag.RaceList"></select>
+                            <div class="input-group-append">
+                                <div class="btn btn-secondary btnHelpRace" type="button"><i class="fas fa-question"></i></div>
+                            </div>
+                            </div>
+                        <input type="hidden" id="RaceName" value="@ViewBag.RaceName" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        You have
+                    </div>
+                    <div class="col-3">
+                        <input class="form-control" id="currentStatPoints" value="@Model.StatPoints" readonly />
+                    </div>
+                    <div class="col-3">
+                        point(s) remaining.
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-12">
+                        <table class="table">
+                            <tr>
+                                <th>Stat</th>
+                                <th></th>
+                                <th>Minimum</th>
+                                <th>Maximum</th>
+                                <th>
+
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="d-inline-block">Durability</p>
+                                   
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-secondary btn-circle btnHelp" data-id="Durability"><i class="fas fa-question"></i></button>
+                                </td>
+                                <td>
+                                    <input class="form-control" value="@Model.MinDur" id="min_durability" readonly />
+                                </td>
+                                <td>
+                                    <input class="form-control" value="@Model.MaxDur" id="max_durability" readonly />
+                                </td>
+                                <td>
+                                    <div class="float-right">
+                                        <div class="input-group">
+                                            <input class="form-control border border-secondary statBlock" id="stat_durability" value="@Model.MinDur" readonly />
+                                            <div class="input-group-append">
+                                                <button type="button" data-id="durability" class="arrowup" ><i class="fas fa-arrow-circle-up fa-2x"></i></button>
+                                                <button type="button" data-id="durability" class="arrowdown"><i class="fas fa-arrow-circle-down fa-2x"></i></button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a class="helpItem" data-id="Dexterity">Dexterity</a>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-secondary btn-circle btnHelp" data-id="Dexterity"><i class="fas fa-question"></i></button>
+                                </td>
+                                <td>
+                                    <input class="form-control" value="@Model.MinDex" id="min_dexterity" readonly />
+                                </td>
+                                <td>
+                                    <input class="form-control" value="@Model.MaxDex" id="max_dexterity" readonly />
+                                </td>
+                                <td>
+                                    <div class="float-right">
+                                        <div class="input-group">
+                                            <input class="form-control border border-secondary statBlock" id="stat_dexterity" readonly value="@Model.MinDex" />
+                                            <div class="input-group-append">
+                                                <button type="button" data-id="dexterity" class="arrowup"><i class="fas fa-arrow-circle-up fa-2x"></i></button>
+                                                <button type="button" data-id="dexterity" class="arrowdown"><i class="fas fa-arrow-circle-down fa-2x"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a class="helpItem" data-id="Charisma">Charisma</a>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-secondary btn-circle btnHelp" data-id="Charisma"><i class="fas fa-question"></i></button>
+                                </td>
+                                <td>
+                                    <input class="form-control" value="@Model.MinCha" id="min_charisma" readonly />
+                                </td>
+                                <td>
+                                    <input class="form-control" value="@Model.MaxCha" id="max_charisma" readonly />
+                                </td>
+                                <td>
+                                    <div class="float-right">
+                                        <div class="input-group">
+                                            <input class="form-control border border-secondary statBlock" id="stat_charisma" readonly value="@Model.MinCha" />
+                                            <div class="input-group-append">
+                                                <button type="button" data-id="charisma" class="arrowup"><i class="fas fa-arrow-circle-up fa-2x"></i></button>
+                                                <button type="button" data-id="charisma" class="arrowdown"><i class="fas fa-arrow-circle-down fa-2x"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a class="helpItem" data-id="Intellect">Intellect</a>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-secondary btn-circle btnHelp" data-id="Intellect"><i class="fas fa-question"></i></button>
+                                </td>
+                                <td>
+                                    <input class="form-control" value="@Model.MinInt" id="min_intellect" readonly />
+                                </td>
+                                <td>
+                                    <input class="form-control" value="@Model.MaxInt" id="max_intellect" readonly />
+                                </td>
+                                <td>
+                                    <div class="float-right">
+                                        <div class="input-group">
+                                            <input class="form-control border border-secondary statBlock" id="stat_intellect" readonly value="@Model.MinInt" />
+                                            <div class="input-group-append">
+                                                <button type="button" data-id="intellect" class="arrowup"><i class="fas fa-arrow-circle-up fa-2x"></i></button>
+                                                <button type="button" data-id="intellect" class="arrowdown"><i class="fas fa-arrow-circle-down fa-2x"></i></button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a class="helpItem" data-id="Intuition">Intuition</a>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-secondary btn-circle btnHelp" data-id="Intuition"><i class="fas fa-question"></i></button>
+                                </td>
+                                <td>
+                                    <input class="form-control" value="@Model.MinIntuit" id="min_intuition" readonly />
+                                </td>
+                                <td>
+                                    <input class="form-control" value="@Model.MaxIntuit" id="max_intuition" readonly />
+                                </td>
+                                <td>
+                                    <div class="float-right">
+
+                                        <div class="input-group">
+                                            <input class="form-control border border-secondary statBlock" id="stat_intuition" readonly value="@Model.MinIntuit" />
+                                            <div class="input-group-append">
+                                                <button type="button" data-id="intuition" class="arrowup"><i class="fas fa-arrow-circle-up fa-2x"></i></button>
+                                                <button type="button" data-id="intuition" class="arrowdown"><i class="fas fa-arrow-circle-down fa-2x"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a class="helpItem" data-id="Willpower">Willpower</a>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-secondary btn-circle btnHelp" data-id="Willpower"><i class="fas fa-question"></i></button>
+                                </td>
+                                <td>
+                                    <input class="form-control" value="@Model.MinWill" id="min_willpower" readonly />
+                                </td>
+                                <td>
+                                    <input class="form-control" value="@Model.MaxWill" id="max_willpower" readonly />
+                                </td>
+                                <td>
+                                    <div class="float-right">
+                                        <div class="input-group">
+                                            <input class="form-control border border-secondary statBlock" id="stat_willpower" readonly value="@Model.MinWill" />
+                                            <div class="input-group-append">
+                                                <button type="button" data-id="willpower" class="arrowup"><i class="fas fa-arrow-circle-up fa-2x"></i></button>
+                                                <button type="button" data-id="willpower" class="arrowdown"><i class="fas fa-arrow-circle-down fa-2x"></i></button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+    $(document).ready(function () {
+
+        var total = @Model.StatPoints;
+        var maxTotal = @Model.StatPoints;
+
+        $('#btnStatDone').click(function () {
+            var id = $("#RaceID").val();
+            var url = '@Url.Action("SkillCalculator", "PlayerCharacters")?RaceID=' + id;
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (data) {
+                    $('#backSkills').html(data);
+                    $('#backSkillsTab').show();
+                    $('#backSkillsLink').click();
+                }
+            });
+        });
+
+        $(".btnHelpRace").click(function () {
+            var id = $("#RaceName").val();
+
+            var url = '@Url.Action("HelpComponent", "HelpItems")?HelpTerm=' + id;
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (data) {
+                   $("#site_modal_container").html(data);
+                    $("#site_modal").modal();
+                }
+            });
+        });
+
+        $(".btnHelp").click(function () {
+            var id = $(this).attr('data-id');
+            var url = '@Url.Action("HelpComponent", "HelpItems")?HelpTerm=' + id;
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (data) {
+                    $("#site_modal_container").html(data);
+                    $("#site_modal").modal();
+                }
+            });
+            
+        });
+
+
+         $("#RaceID").change(function () {
+            var id = $("#RaceID").val();
+            var url = '@Url.Action("StatCalculator", "PlayerCharacters")?RaceID=' + id;
+            var selectedRace = $("#RaceID option:selected").text();
+            $('#backSkillsTab').hide();
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (data) {
+                    $("#dvSetStatPoints").empty();
+                    $("#dvSetStatPoints").html(data);
+                    $("#RaceName").val(selectedRace);
+                }
+           });
+
+        });
+
+        $('.arrowup').click(function () {
+                        var stat = $(this).attr('data-id');
+            var currentVal = $('#stat_' + stat).val();
+            var maxStat = $("#max_" + stat).val()
+
+            if (Number(total) > 0 && Number(currentVal) < Number(maxStat)) {
+                var currentValue = $("#stat_" + stat).val();
+                $("#stat_" + stat).val(Number(currentValue) + 1);
+                total = total - 1;
+                $("#currentStatPoints").val(Number(total));
+            }
+
+            if (total == 0) {
+                $("#btnStatDone").show();
+            }
+        })
+
+        $('.arrowdown').click(function () {
+                        var stat = $(this).attr('data-id');
+            var currentVal = $('#stat_' + stat).val();
+            var minStat = $("#min_" + stat).val()
+
+            if (Number(currentVal) > Number(minStat) && Number(total) < Number(maxTotal)) {
+                                var currentValue = $("#stat_" + stat).val();
+                $("#stat_" + stat).val(Number(currentValue) - 1);
+                total += + 1;
+                $("#currentStatPoints").val(Number(total));
+            }
+
+            $("#btnStatDone").hide();
+            $('#backSkillsTab').hide();
+        });
+
+    });
+
+
+    </script>

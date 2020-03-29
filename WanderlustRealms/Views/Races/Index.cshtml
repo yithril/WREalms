@@ -1,0 +1,108 @@
+﻿@model IEnumerable<WanderlustRealms.Models.Races.Race>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="card">
+    <h4 class="card-header">Race Index</h4>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="float-right">
+                    <p>
+                        <a asp-action="Create">Create New</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MinLightLevel)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Size)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsPremium)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsPlayable)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StatPoints)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SkillPoints)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PicURL)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Body)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsActive)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MinLightLevel)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Size)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsPremium)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsPlayable)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StatPoints)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SkillPoints)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PicURL)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Body.BodyName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsActive)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.RaceID">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@item.RaceID">Details</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.RaceID">Delete</a> |
+                                    <a asp-action="Index" asp-controller="RaceLanguages" asp-route-RaceID="@item.RaceID">Languages</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

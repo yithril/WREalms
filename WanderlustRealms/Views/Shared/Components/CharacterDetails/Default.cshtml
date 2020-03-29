@@ -1,0 +1,176 @@
+﻿@model WanderlustRealms.Models.Living.PlayerCharacter
+
+@{
+    ViewData["Title"] = "Default";
+    Layout = "_Layout";
+}
+
+    <style>
+        .btn-circle {
+            width: 25px;
+            height: 25px;
+            padding: 4px 0px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 12px;
+            line-height: 1.42857;
+        }
+    </style>
+
+<div class="card">
+    <div class="card-header"><h3><b>@Model.Name</b> of @Model.RoomKingdom.Name</h3></div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <h4 class="card-header">Character Info</h4>
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-3">
+                                Name
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Model.Name
+                            </dd>
+                            <dt class="col-sm-3">
+                                Race
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Model.Race.Name
+                            </dd>
+                            <dt class="col-sm-3">
+                                Background
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Model.Background.Name
+                            </dd>
+                            <dt class="col-sm-3">
+                                Gender
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Model.Gender
+                            </dd>
+                            <dt class="col-sm-3">
+                                Level
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Model.Level
+                            </dd>
+                            <dt class="col-sm-3">
+                                Alignment
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Model.GetOrderAlignment() / @Model.GetGoodAlignment()
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <h4 class="card-header">Statistics</h4>
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-3">
+                                Charisma
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Model.Charisma / @Model.Race.MaxCha
+                            </dd>
+                            <dt class="col-sm-3">
+                                Dexterity
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Model.Dexterity / @Model.Race.MaxDex
+                            </dd>
+                            <dt class="col-sm-3">
+                                Durability
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Model.Durability / @Model.Race.MaxDur
+                            </dd>
+                            <dt class="col-sm-3">
+                                Intellect
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Model.Intellect / @Model.Race.MaxInt
+                            </dd>
+
+                            <dt class="col-sm-3">
+                                Intuition
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Model.Intuition / @Model.Race.MaxIntuit
+                            </dd>
+                            <dt class="col-sm-3">
+                                Willpower
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Model.Willpower / @Model.Race.MaxWill
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-12">
+                <div class="card">
+                    <h4 class="card-header">Skills</h4>
+                    <div class="card-body">
+                        <table class="table">
+                            <tr>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            @foreach(var skill in Model.PlayerSkills.OrderBy(x => x.Skill.Name))
+                            {
+                                <tr>
+                                    <td>@skill.Skill.Name
+                                        <button type="button" class="btn btn-secondary btn-circle btnHelp" data-id="@skill.Skill.Name"><i class="fas fa-question"></i></button>
+                                    </td>
+                                    <td>
+                                        <div class="float-right">
+                                            @skill.Level
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <h4 class="card-header">Quests</h4>
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        $(".btnHelp").click(function () {
+            var id = $(this).attr('data-id');
+            var url = '@Url.Action("HelpComponent", "HelpItems")?HelpTerm=' + id;
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (data) {
+                    $("#site_modal_container").html(data);
+                    $("#site_modal").modal('show');
+                }
+            });
+
+        });
+    });
+
+</script>

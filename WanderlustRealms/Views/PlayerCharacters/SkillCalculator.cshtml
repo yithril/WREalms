@@ -1,0 +1,93 @@
+﻿@model IEnumerable<WanderlustRealms.Models.ViewModel.SkillPointViewModel>
+
+@{
+    ViewData["Title"] = "SkillCalculator";
+    Layout = null;
+}
+
+<div class="card">
+    <div class="card-header">Assign Skill Points</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-2">
+                You have
+            </div>
+            <div class="col-3">
+                <input class="form-control" id="currentSkillPoints" readonly value="@ViewBag.StartingSkillPoints" />
+            </div>
+            <div class="col-3">
+                point(s) remaining.
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <tr>
+                        <th>Skill Name</th>
+                        <th>Racial Bonus</th>
+                        <th>Background Bonus</th>
+                        <th></th>
+                        <th>Total</th>
+                    </tr>
+                    @foreach (var s in Model)
+                    {
+                        <tr>
+                            <td>@s.Name</td>
+                            <td>
+                                <input class="form-control" readonly value="@s.RaceBonus" />
+                            </td>
+                            <td>
+                                <input class="form-control" readonly value="@s.BackgroundBonus" />
+                            </td>
+                            <td>
+                                <div class="input-group">
+                                    <input class="form-control border border-secondary skillBlock" id="skill_@s.Name" readonly value="0" />
+                                    <div class="input-group-append">
+                                        <button type="button" data-id="@s.Name" class="skill_arrowup"><i class="fas fa-arrow-circle-up fa-2x"></i></button>
+                                        <button type="button" data-id="@s.Name" class="skill_arrowdown"><i class="fas fa-arrow-circle-down fa-2x"></i></button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="form-control" id="skillTotal_@s.Name" value="@s.TotalBonus" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+    
+        var total = @ViewBag.StartingSkillPoints;
+        var maxTotal = total;
+
+        $(document).on('click', '.skill_arrowup', function () {
+            var skill = $(this).attr('data-id');
+            var currentVal = $('#skill_' + skill).val();
+
+            if (Number(total) > 0) {
+                var currentValue = $("#skill_" + stat).val();
+                $("#skill_" + skill).val(Number(currentValue) + 1);
+                total = total - 1;
+                $("#currentSkillPoints").val(Number(total));
+            }
+        });
+
+        $(document).on('click', '.skill_arrowdown', function () {
+            var skill = $(this).attr('data-id');
+            var currentVal = $('#skill_' + skill).val();
+
+            if (Number(currentVal) > 0) {
+                $("#skill_" + skill).val(Number(currentValue) - 1);
+                total += 1;
+                $("#currentSkillPoints").val(Number(total));
+            }
+        });
+</script>
+

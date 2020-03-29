@@ -1,0 +1,32 @@
+﻿@model WanderlustRealms.Models.ViewModel.RoomItemViewModel
+
+@{
+    ViewData["Title"] = "AddItem";
+}
+
+<div class="card">
+    <div class="card-header">Add Item</div>
+    <div class="card-body">
+        <form asp-action="AddItem">
+            <div class="row">
+                <div class="col-12">
+                    <p>@ViewBag.RoomName</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <input type="hidden" asp-for="RoomID" value="@ViewBag.RoomID" />
+                        <select asp-for="ItemID" asp-items="@ViewBag.ItemList" class="form-control"></select>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+            
+    </div>
+</div>
+

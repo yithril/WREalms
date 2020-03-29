@@ -1,0 +1,133 @@
+﻿@model WanderlustRealms.Models.ViewModel.PCViewModel
+
+@{
+    ViewData["Title"] = "NewCharacter";
+    Layout = "_Layout";
+}
+
+
+    <div class="container-fluid">
+        <form asp-action="CreateNewCharacter">
+            <div class="row">
+                <div class="col-12">
+                    <ul class="nav nav-pills nav-fill bg-success">
+                        <li class="nav-item">
+                            <a class="nav-link active text-light" href="#charBasics" data-toggle="tab" id="charBasicLink">Character Basics</a>
+                        </li>
+                        <li class="nav-item" style="display: none;" id="raceStatsTab">
+                            <a class="nav-link text-light" href="#raceStats" data-toggle="tab" id="raceStatsLink">Set Race and Stats</a>
+                        </li>
+                        <li class="nav-item" style="display: none;" id="backSkillsTab">
+                            <a class="nav-link text-light" href="#backSkills" data-toggle="tab" id="backSkillsLink">Set Background and Skills</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content mt-2" id="myTabContent">
+                        <div class="tab-pane fade show active" id="charBasics" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="float-right">
+                                                <button class="btn btn-primary" id="btnInfo" style="display: none;" type="button">Next</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Name" class="control-label"></label>
+                                        <input asp-for="Name" class="form-control" />
+                                        <span asp-validation-for="Name" class="text-danger"></span>
+                                    </div>
+
+                                    <div id="dvNameCheck" style="display: none">
+                                        <div class="alert alert-warning" role="alert">
+                                            <p>That name is already taken.  Please choose another.</p>
+                                        </div>
+                                    </div>
+
+                                    <div id="dvMinimumName" style="display: none;">
+                                        <div class="alert alert-warning" role="alert">
+                                            <p>Names can be no less than three characters.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Select Gender</label>
+                                        <select asp-for="Gender" asp-items="Html.GetEnumSelectList<WanderlustRealms.Models.Enum.Gender>()" class="form-control"></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Select Home Kingdom</label>
+                                        <select asp-for="RoomKingdom" asp-items="@ViewBag.KingdomList" class="form-control"></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Good/Evil Alignment</label>
+                                        <select asp-for="GoodAlignChoice" asp-items="Html.GetEnumSelectList<WanderlustRealms.Models.Enum.GoodAlignmentChoices>()" class="form-control"></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Order/Chaos Alignment</label>
+                                        <select asp-for="OrderAlignChoice" asp-items="Html.GetEnumSelectList<WanderlustRealms.Models.Enum.OrderAlignmentChoices>()" class="form-control"></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="raceStats" role="tabpanel">
+                            @await Component.InvokeAsync("StatCalculator")
+                        </div>
+                        <div class="tab-pane fade" id="backSkills" role="tabpanel">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        $("#Name").on('input', function () {
+            if ($("#Name").val() != '') {
+
+                if ($("#Name").val().length > 2) {
+                    $("#dvMinimumName").hide();
+                    var url = '@Url.Action("GetNameExists", "PlayerCharacters")?name=' + $("#Name").val();
+
+                    $.ajax({
+                        url: url,
+                        type: 'GET',
+                        success: function (data) {
+                            console.log(typeof(data));
+                            if (data == false) {
+                                $("#btnInfo").show();
+                            } else {
+                                $("#btnInfo").hide();
+                            }
+                        }
+                    });
+                } else {
+                    $("#dvMinimumName").show();
+                    $("#btnInfo").hide();
+                }
+            }
+        });
+
+        $("#btnInfo").click(function () {
+            var name = $("#Name").val();
+
+            if (name != '') {
+                $("#raceStatsTab").show();
+                $("#raceStatsLink").click();
+            }
+
+        });
+
+    });
+
+</script>
+
+
+
+

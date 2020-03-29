@@ -1,0 +1,47 @@
+﻿@model IEnumerable<WanderlustRealms.Models.Training.TrainerSkill>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Trainer Skills for @ViewBag.Name</h1>
+
+<p>
+    <a asp-action="Create" asp-route-LivingID="@ViewBag.LivingID">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Skill)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MinLevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxLevel)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Skill.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MinLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxLevel)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.TrainerSkillID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.TrainerSkillID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.TrainerSkillID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
